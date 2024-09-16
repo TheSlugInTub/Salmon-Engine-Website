@@ -75,6 +75,14 @@ scene.AssignParam&lt;Position&gt;(ent, 1.0f, 2.0f, 3.0f);</pre>
             <pre class="code">
 Position* pos = scene.Get&lt;Position&lt;(ent);</pre>
             <p>This returns a pointer to the component you have assigned to the entity.</p>
+            <h2>Systems</h2>
+            <p>Systems are treated as functions that are run every frame in the engine. You can either run them manually yourself, or use this macro:</p>
+            <pre class="code">
+REGISTER_SYSTEM(SystemType);</pre>
+            <p>This will add your system (function), to a list of functions in the ECS, which you can execute each frame by calling UpdateSystems() in your main loop.</p>
+
+            <p>"Why the hell is this macro here?", you might ask. Well this is just so I don't have to manually call each and every system I create in the main function, I think it makes code messier that way, registering each system in another file, and calling them all just seems a bit cleaner to me.</p>
+            <p></p>
             </div>
         </div>
     </main>
