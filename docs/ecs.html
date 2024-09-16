@@ -76,10 +76,10 @@ scene.AssignParam&lt;Position&gt;(ent, 1.0f, 2.0f, 3.0f);</pre>
 Position* pos = scene.Get&lt;Position&lt;(ent);</pre>
             <p>This returns a pointer to the component you have assigned to the entity.</p>
             <h2>Systems</h2>
-            <p>Systems are treated as functions that are run every frame in the engine. You can either run them manually yourself,<br> or use this macro:</p>
+            <p>Systems are treated as functions that are run every frame in the engine. You can either run them manually<br> yourself, or use this macro:</p>
             <pre class="code">
 REGISTER_SYSTEM(SystemType);</pre>
-            <p>This will add your system (function), to a list of functions in the ECS, which you can execute each frame by calling UpdateSystems() in your main loop.</p>
+            <p>This will add your system (function), to a list of functions in the ECS, which you can execute each frame by<br> calling UpdateSystems() in your main loop.</p>
 
             <p>"Why the hell is this macro here?", you might ask. Well this is just so I don't have to manually call each<br> and every system I create in the main function, I think it makes code messier that way, registering each system<br>in another file, and calling them all just seems a bit cleaner to me.</p>
 
@@ -87,8 +87,19 @@ REGISTER_SYSTEM(SystemType);</pre>
             <pre class="code">
 REGISTER_START_SYSTEM(SystemType);</pre>
 
-            <p>This adds your system to another list of systems that are called the start systems, you can run all the start systems<br> by calling StartStartSystems() at the end of your first frame (few lines before your main loop).</p>
-            <p></p>
+            <p>This adds your system to another list of systems that are called the start systems,<br> you can run all the start systems by calling StartStartSystems() at the end of your first frame<br>(few lines before your main loop).</p>
+            <h2>Scene views</h2>
+            <p>Scene views are an easy way of looping over each entity in a scene with distinct components. Here's how you can employ them:</p>
+            <pre class="code">
+void PositionSystem()
+{
+    for (EntityID ent : SceneView<Position>(scene))
+    {
+        Position* pos = scene.Get<Position>(ent);
+
+        pos.x += 0.1f;
+    }
+}</pre>
             </div>
         </div>
     </main>
