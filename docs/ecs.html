@@ -49,7 +49,22 @@ Scene scene;</pre>
             <h2>Entities</h2>
             <p>Here's how you can make an entity:</p>
             <pre class="code">
-EntityID ent = scene.AddEntity</pre>
+EntityID ent = scene.AddEntity();</pre>
+
+            <h2>Components</h2>
+
+            <p>Make a struct od whatever you want.</p>
+
+            <pre class="code">
+struct Position
+{
+    float x, y, z;
+};</pre>
+            <p>Then assign the component to an entity.</p>
+
+            <pre class="code">
+scene.Assign<Position>(ent);</pre>
+
             </div>
         </div>
     </main>
