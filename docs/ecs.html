@@ -93,9 +93,9 @@ REGISTER_START_SYSTEM(SystemType);</pre>
             <pre class="code">
 void PositionSystem()
 {
-    for (EntityID ent : SceneView<Position>(scene))
+    for (EntityID ent : SceneView&lt;Position&gt;(scene))
     {
-        Position* pos = scene.Get<Position>(ent);
+        Position* pos = scene.Get&lt;Position&gt;(ent);
 
         pos.x += 0.1f;
     }
