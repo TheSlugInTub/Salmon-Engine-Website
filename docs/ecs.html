@@ -71,6 +71,10 @@ scene.Assign&lt;Position&gt;(ent);</pre>
 scene.AssignParam&lt;Position&gt;(ent, 1.0f, 2.0f, 3.0f);</pre>
 
             <p>The arguments after 'ent' would be the constructor.</p>
+            <p>If you want to retrieve a component from an entity then: </p>
+            <pre class="code">
+Position* pos = scene.Get&lt;Position&lt;(ent);</pre>
+            <p>This returns a pointer to the component you have assigned to the entity.</p>
             </div>
         </div>
     </main>
