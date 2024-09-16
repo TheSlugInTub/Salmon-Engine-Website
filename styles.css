@@ -30,6 +30,11 @@ header {
     src: url('fonts/ContFont.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Mono';
+    src: url('fonts/Mono.ttf') format('truetype');
+}
+
 h1 {
     font-family: 'ContFont';
     color: white;
@@ -58,6 +63,16 @@ pre {
     line-height: 26px;
     font-family: 'ContFont';
     color: white;
+}
+
+.code {
+    font-family: 'Mono'; /* Monospaced font for code */
+    background-color: #2b2c2f; /* Light gray background */
+    color: #8b8b8d; /* Darker text color */
+    padding: 10px; /* Adds space inside the element */
+    border-radius: 8px; /* Slightly rounded corners */
+    white-space: pre-wrap; /* Preserves line breaks and indentation */
+    display: block; /* Ensures it spans the full width */
 }
 
 a {
@@ -97,6 +112,7 @@ nav {
     background-color: #333; /* Background color for tabs */
     border-radius: 5px;
     overflow: hidden;
+    margin-left: 418px;
 }
 
 .tabs li {

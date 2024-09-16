@@ -37,7 +37,16 @@
             <!-- Main document content -->
             <div class="doc-content">
                 <h1>Salmon ECS</h1>
-                <p></p>
+                <p>Salmon Engine uses an ECS (Entity component system) paradigm as its design structure.</p>
+                <p>If you don't quite understand how an ECS works, an ECS has three main components (pun not intended),<br> entities, components, and systems. Entities are IDs, just numbers really. A component, which is a struct of data,<br> can be associated with that entity ID. So you can create entities and assign components to them.<br> Systems are logic, the engine treats systems as functions that are run every frame, they can loop over entities <br> with specific components and do logic on them.</p>
+
+            <p>Here's how to use the ECS in the engine:</p>
+            <h2>Scenes</h2>
+            <p>Scenes hold entities, they're like a registry of sorts, here's how to make one: </p>
+            <pre class="code">
+Scene scene;</pre>
+
+
             </div>
         </div>
     </main>
