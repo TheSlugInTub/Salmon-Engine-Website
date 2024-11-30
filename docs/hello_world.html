@@ -37,14 +37,56 @@
 
             <!-- Main document content -->
             <div class="doc-content">
-                <h1>Getting started</h1>
-                <p>Clone the repository by typing: `git clone https://github.com/TheSlugInTub/Salmon-Engine.git`,<br> although you must have git installed. If you don't have git then you can just download the source code off github.</p>
-                <h2>Compiling the engine</h2>
-                <p>Salmon Engine uses CMake as its build tool, you must have it installed.</p>
-                <p>Open command prompt, change directory into the folder where you downloaded the source code. <br>Make a build folder, change directory to the build folder, type `cmake ..` to generate build files.</p>
-                <p>Once build files are generated, change directory to the root directory and type `cmake --build build/`<br>to compile the engine, compiling takes a long time, have a coffee break while you're at it.</p>
+                <h1>Hello world</h1>
+                <p>Here is a simple starter program with a window.</p>
 
-                <p>If you want to integrate the engine into your own project, copy the 'src' and 'include' <br> directories into your own project's source and include directories. <br> And copy the 'shaders' and 'res' directories into your project's root directory.</p>
+
+            <pre class="code">
+#include <iostream>
+#include <salmon/salmon.h>
+
+// Settings
+const unsigned int SCR_WIDTH = 1920;
+const unsigned int SCR_HEIGHT = 1080;
+
+int main(int argc, char** argv)
+{
+    Window window("Window", SCR_WIDTH, SCR_HEIGHT, false /*Determines whether the window is fullscreen*/ );
+
+    // Main scene to hold all the entities
+    Scene scene;
+
+    // Add some entities and attach some components!
+    // EntityID box = scene.AddEntity();
+    // scene.AssignParam<Transform>(box, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f),
+    //                             glm::vec3(1.0f, 1.0f, 1.0f));
+
+    // Set the global engine state
+    engineState.SetScene(scene); 
+    // engineState.SetCamera(camera); // if you have a camera you better do this
+
+    StartStartSystems(); // Call all the registered start systems
+
+    // Main loop
+    // -----------
+    while (!window.ShouldClose())
+    {
+        // Call all the registered systems
+        UpdateSystems();
+
+        // Per frame logic here
+        // ...
+
+        // End of frame
+        window.Update();
+    }
+
+    return 0;
+}</pre>
+
+            <p>The window class makes a window and the window.Update() at the end of the main loop swaps the buffers.</p>           
+            <p>You need to set the engine state's scene as your scene because there are systems within the engine that loop over all the entities in a scene and they can't do that if they don't know what the scene is.</p>
+
             </div>
         </div>
     </main>
