@@ -1,52 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salmon Engine</title>
-    <link rel="icon" type="image/png" href="../Salmon.png">
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <img src="../Salmon.png" alt="Logo" class="logo">
-            <h1 class="WebTitle">Salmon Engine</h1>
-            <nav>
-                <ul class="tabs">
-                    <li><a href="../index.html " class="tab-link" data-content="home.html">Home</a></li>
-                    <li><a href="../people.html" class="tab-link" data-content="people.html">People</a></li>
-                    <li><a href="introduction.html" class="tab-link" data-content="docs.html">Docs</a></li>
-                    <li><a href="https://github.com/TheSlugInTub/Salmon-Engine/" class="tab-link" data-content="people.html">Github</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main>
-        <div class="content-container">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <h3>Documentation</h3>
-                <ul class="sidebar-links">
-                    <li><a href="introduction.html">Introduction</a></li>
-                    <li><a href="getting_started.html">Getting Started</a></li>
-                    <li><a href="ecs.html">ECS</a></li>
-                    <li><a href="hello_world.html">Hello world</a></li>
-                </ul>
-            </aside>
+<link rel="stylesheet" href="../doc_style.css">
 
-            <!-- Main document content -->
-            <div class="doc-content">
-                <h1>Getting started</h1>
-                <p>Clone the repository by typing: `git clone https://github.com/TheSlugInTub/Salmon-Engine.git`,<br> although you must have git installed. If you don't have git then you can just download the source code off github.</p>
-                <h2>Compiling the engine</h2>
-                <p>Salmon Engine uses CMake as its build tool, you must have it installed.</p>
-                <p>Open command prompt, change directory into the folder where you downloaded the source code. <br>Make a build folder, change directory to the build folder, type `cmake ..` to generate build files.</p>
-                <p>Once build files are generated, change directory to the root directory and type `cmake --build build/`<br>to compile the engine, compiling takes a long time, have a coffee break while you're at it.</p>
+<h1>Getting started</h1>
+<p>Clone the repository by typing: `git clone https://github.com/TheSlugInTub/Salmon-Engine.git`,<br> although you must have git installed. If you don't have git then you can just download the source code off github.</p>
+<h2>Compiling the engine</h2>
+<p>Salmon Engine uses CMake as its build tool, you must have it installed.</p>
+<p>Open command prompt, change directory into the folder where you downloaded the source code. <br>Make a build folder, change directory to the build folder, type `cmake ..` to generate build files.</p>
+<p>Once build files are generated, change directory to the root directory and type `cmake --build build/`<br>to compile the engine, compiling takes a long time, have a coffee break while you're at it.</p>
 
-                <p>If you want to integrate the engine into your own project, copy the 'src' and 'include' <br> directories into your own project's source and include directories. <br> And copy the 'shaders' and 'res' directories into your project's root directory.</p>
-            </div>
-        </div>
-    </main>
-</body>
-</html>
+<p>If you want to integrate the engine into your own project, copy the 'src' and 'include' <br> directories into your own project's source and include directories. <br> And copy the 'shaders' and 'res' directories into your project's root directory.</p>

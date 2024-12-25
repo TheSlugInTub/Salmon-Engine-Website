@@ -1,97 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salmon Engine</title>
-    <link rel="icon" type="image/png" href="../Salmon.png">
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <img src="../Salmon.png" alt="Logo" class="logo">
-            <h1 class="WebTitle">Salmon Engine</h1>
-            <nav>
-                <ul class="tabs">
-                    <li><a href="../index.html " class="tab-link" data-content="home.html">Home</a></li>
-                    <li><a href="../people.html" class="tab-link" data-content="people.html">People</a></li>
-                    <li><a href="introduction.html" class="tab-link" data-content="docs.html">Docs</a></li>
-                    <li><a href="https://github.com/TheSlugInTub/Salmon-Engine/" class="tab-link" data-content="people.html">Github</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main>
-        <div class="content-container">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <h3>Documentation</h3>
-                <ul class="sidebar-links">
-                    <li><a href="introduction.html">Introduction</a></li>
-                    <li><a href="getting_started.html">Getting Started</a></li>
-                    <li><a href="ecs.html">ECS</a></li>
-                    <li><a href="hello_world.html">Hello world</a></li>
-                </ul>
-            </aside>
+<link rel="stylesheet" href="../doc_style.css">
 
-            <!-- Main document content -->
-            <div class="doc-content">
-                <h1>Salmon ECS</h1>
-                <p>Salmon Engine uses an ECS (Entity component system) paradigm as its design structure.</p>
-                <p>If you don't quite understand how an ECS works, an ECS has three main components (pun not intended),<br> entities, components, and systems. Entities are IDs, just numbers really. A component, which is a struct of data,<br> can be associated with that entity ID. So you can create entities and assign components to them.<br> Systems are logic, the engine treats systems as functions that are run every frame, they can loop over entities <br> with specific components and do logic on them.</p>
+<h1>Salmon ECS</h1>
+<p>Salmon Engine uses an ECS (Entity component system) paradigm as its design structure.</p>
+ <p>If you don't quite understand how an ECS works, an ECS has three main components (pun not intended),<br> entities, components, and systems. Entities are IDs, just numbers really. A component, which is a struct of data,<br> can be associated with that entity ID. So you can create entities and assign components to them.<br> Systems are logic, the engine treats systems as functions that are run every frame, they can loop over entities <br> with specific components and do logic on them.</p>
 
-            <p>Here's how to use the ECS in the engine:</p>
-            <h2>Scenes</h2>
-            <p>Scenes hold entities, they're like a registry of sorts, here's how to make one: </p>
-            <pre class="code">
+<p>Here's how to use the ECS in the engine:</p>
+<h2>Scenes</h2>
+<p>Scenes hold entities, they're like a registry of sorts, here's how to make one: </p>
+<pre class="code">
 Scene scene;</pre>
 
-            <h2>Entities</h2>
-            <p>Here's how you can make an entity:</p>
-            <pre class="code">
+<h2>Entities</h2>
+<p>Here's how you can make an entity:</p>
+<pre class="code">
 EntityID ent = scene.AddEntity();</pre>
 
-            <h2>Components</h2>
+<h2>Components</h2>
 
-            <p>Make a struct of whatever you want.</p>
+<p>Make a struct of whatever you want.</p>
 
-            <pre class="code">
+<pre class="code">
 struct Position
 {
     float x, y, z;
 };</pre>
-            <p>Then assign the component to an entity.</p>
+<p>Then assign the component to an entity.</p>
 
-            <pre class="code">
+<pre class="code">
 scene.Assign&lt;Position&gt;(ent);</pre>
 
-            <p>If your struct has a constructor, or you just need to initialize values, then: </p>
+<p>If your struct has a constructor, or you just need to initialize values, then: </p>
 
-            <pre class="code">
+<pre class="code">
 scene.AssignParam&lt;Position&gt;(ent, 1.0f, 2.0f, 3.0f);</pre>
 
-            <p>The arguments after 'ent' would be the constructor.</p>
-            <p>If you want to retrieve a component from an entity then: </p>
-            <pre class="code">
-Position* pos = scene.Get&lt;Position&lt;(ent);</pre>
-            <p>This returns a pointer to the component you have assigned to the entity.</p>
-            <h2>Systems</h2>
-            <p>Systems are treated as functions that are run every frame in the engine. You can either run them manually<br> yourself, or use this macro:</p>
-            <pre class="code">
+<p>The arguments after 'ent' would be the constructor.</p>
+<p>If you want to retrieve a component from an entity then: </p>
+<pre class="code">
+Position* pos = scene.Get&lt;Position&gt;(ent);</pre>
+<p>This returns a pointer to the component you have assigned to the entity.</p>
+<h2>Systems</h2>
+<p>Systems are treated as functions that are run every frame in the engine. You can either run them manually<br> yourself, or use this macro:</p>
+<pre class="code">
 REGISTER_SYSTEM(SystemType);</pre>
-            <p>This will add your system (function), to a list of functions in the ECS, which you can execute each frame by<br> calling UpdateSystems() in your main loop.</p>
+<p>This will add your system (function), to a list of functions in the ECS, which you can execute each frame by<br> calling UpdateSystems() in your main loop.</p>
 
-            <p>"Why the hell is this macro here?", you might ask. Well this is just so I don't have to manually call each<br> and every system I create in the main function, I think it makes code messier that way, registering each system<br>in another file, and calling them all just seems a bit cleaner to me.</p>
+<p>"Why the hell is this macro here?", you might ask. Well this is just so I don't have to manually call each<br> and every system I create in the main function, I think it makes code messier that way, registering each system<br>in another file, and calling them all just seems a bit cleaner to me.</p>
 
-            <p>Also there's another macro for making a start system:</p>
-            <pre class="code">
+<p>Also there's another macro for making a start system:</p>
+<pre class="code">
 REGISTER_START_SYSTEM(SystemType);</pre>
 
-            <p>This adds your system to another list of systems that are called the start systems,<br> you can run all the start systems by calling StartStartSystems() at the end of your first frame<br>(few lines before your main loop).</p>
-            <h2>Scene views</h2>
-            <p>Scene views are an easy way of looping over each entity in a scene with distinct components. Here's how you can employ them:</p>
-            <pre class="code">
+<p>This adds your system to another list of systems that are called the start systems,<br> you can run all the start systems by calling StartStartSystems() at the end of your first frame<br>(few lines before your main loop).</p>
+<h2>Scene views</h2>
+<p>Scene views are an easy way of looping over each entity in a scene with distinct components. Here's how you can employ them:</p>
+<pre class="code">
 void PositionSystem()
 {
     for (EntityID ent : SceneView&lt;Position&gt;(scene))
@@ -101,8 +64,3 @@ void PositionSystem()
         pos.x += 0.1f;
     }
 }</pre>
-            </div>
-        </div>
-    </main>
-</body>
-</html>

@@ -1,47 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salmon Engine</title>
-    <link rel="icon" type="image/png" href="../Salmon.png">
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <img src="../Salmon.png" alt="Logo" class="logo">
-            <h1 class="WebTitle">Salmon Engine</h1>
-            <nav>
-                <ul class="tabs">
-                    <li><a href="../index.html " class="tab-link" data-content="home.html">Home</a></li>
-                    <li><a href="../people.html" class="tab-link" data-content="people.html">People</a></li>
-                    <li><a href="introduction.html" class="tab-link" data-content="docs.html">Docs</a></li>
-                    <li><a href="https://github.com/TheSlugInTub/Salmon-Engine/" class="tab-link" data-content="people.html">Github</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main>
-        <div class="content-container">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <h3>Documentation</h3>
-                <ul class="sidebar-links">
-                    <li><a href="introduction.html">Introduction</a></li>
-                    <li><a href="getting_started.html">Getting Started</a></li>
-                    <li><a href="ecs.html">ECS</a></li>
-                    <li><a href="hello_world.html">Hello world</a></li>
-                </ul>
-            </aside>
 
-            <!-- Main document content -->
-            <div class="doc-content">
-                <h1>Hello world</h1>
-                <p>Here is a simple starter program with a window.</p>
+<link rel="stylesheet" href="../doc_style.css">
+
+<h1>Hello world</h1>
+<p>Here is a simple starter program with a window.</p>
 
 
-            <pre class="code">
+<pre class="code">
 #include &lt;iostream&gt;
 #include &lt;salmon/salmon.h&gt;
 
@@ -58,7 +22,7 @@ int main(int argc, char** argv)
 
     // Add some entities and attach some components!
     // EntityID box = scene.AddEntity();
-    // scene.AssignParam<Transform>(box, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f),
+    // scene.AssignParam&lt;Transform&gt;(box, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f),
     //                             glm::vec3(1.0f, 1.0f, 1.0f));
 
     // Set the global engine state
@@ -84,11 +48,6 @@ int main(int argc, char** argv)
     return 0;
 }</pre>
 
-            <p>The window class makes a window and the window.Update() at the end of the main loop swaps the buffers.</p>           
-            <p>You need to set the engine state's scene as your scene because there are systems within the engine that loop over all the entities in a scene and they can't do that if they don't know what the scene is.</p>
+<p>The window class makes a window and the window.Update() at the end of the main loop swaps the buffers.</p>           
+<p>You need to set the engine state's scene as your scene because there are systems within the engine that loop over all the entities in a scene and they can't do that if they don't know what the scene is.</p>
 
-            </div>
-        </div>
-    </main>
-</body>
-</html>
