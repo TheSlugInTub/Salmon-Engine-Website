@@ -2,3 +2,19 @@
 
 <h1>sm2d</h1>
 <p>sm2d is the 2d physics engine for Salmon Engine.</p>
+<p>
+It's quite similar to Box2D. It uses an AABB tree for broad phase collision testing, using the Box2D insertion algorithm to insert colliders into the tree.<br>
+The colliders that are awake get removed from the tree and then re-inserted each frame, because the bounding box in the tree has already lagged behind where the actual collider is.<br>
+And if a body's linear velocity or angular velocity isn't higher than a certain threshold (0.05 for angular, and 0.01 for linear), the hasMoved flag gets turned off,
+and if that body collides with another body whose hasMoved flag is off, then they both go to sleep. If a body who's sleeping collides with a body that's awake, they both wake up.<br>
+This is probably a naive solution for sleeping, but it works for now.<br><br>
+There are only 3 collider types at the moment, circle colliders, AABB colliders, and polygon colliders.<br>
+Circle colliders are just that, AABB colliders are boxes that don't rotate, they're much less expensive to compute collisions for than polygons but you're probably gonna be using them with polygon characters which requires the same computation as the polygon vs. polygon collision so it won't even matter, and lastly polygon colliders, they can only be convex, because I'm using the SAT algorithm at the minute, maybe I'll support concave polygons in the future, but they're much more expensive to compute.<br><br>
+The engine is quite simply actually, spanning 1,610 lines of code across 6 files. And it still provides decent stability, here is a showcase of the engine in action:
+</p> 
+
+<video width="320" height="240" controls>
+  <source src="../media/PhysicsShowcase.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
