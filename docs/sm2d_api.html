@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="../doc_style.css">
+
+<h1>sm2d API</h1>
+<p>Here's how you can use sm2d in Salmon Engine.</p>
+<p>First you assign the Rigidbody component to an entity.</p> 
+<pre class="code">
+EntityID ent = scene.AddEntity();
+
+scene.AssignParam&lt;sm2d::Rigidbody&gt;(ent, /*Args*/);</pre>
+
+<p>The arguments for Rigidbody are:</p>
+
+<pre class="code">
+Rigidbody(
+    BodyType type,          // The type of body, do sm2d_Dynamic for moving bodies
+                            // and sm2d_Static for static ones
+    Transform* transform,   // A pointer to the transform of the body, just do 
+                            // scene.Get&lt;Transform&gt;(ent)
+    float mass,             // Mass of the body, how hard it is to move
+    bool awake,             // If the body will get integrated or if its
+                            // AABB in the broad phase tree will get recomputed
+    float linearDamping,    // How much the velocity will be damped each tick
+    float angularDamping,   // Same as linearDamping but for angular velocity
+    float restitution,      // Bounciness
+    bool fixedRotation,     // True if the body won't rotate
+    float momentOfInertia,  // How hard the body is to rotate
+    void* userData          // Tag, put whatever you want here
+    // There are more variables to the struct but you shouldn't initialize them
+    // in the constructor
+)</pre>
+
+<p>And then to detect and respond to collisions, you're gonna want to add a collider. I'm too lazy to write everything down neatly, so here are the raw constructors:</p>
+
+<pre class="code">
+ColAABB (glm::vec2 halfwidths)
+ColPolygon (std::vector&lt;glm::vec2&gt; points /* Points in object space */)
+ColCircle (float radius)
+
+enum ColliderType
+{
+    sm2d_AABB,
+    sm2d_Circle,
+    sm2d_Polygon
+};
+
+Collider(ColliderType type, const ColAABB& aabb, Rigidbody* body)
+Collider(ColliderType type, const ColCircle& circle, Rigidbody* body)
+Collider(ColliderType type, const ColPolygon& poly, Rigidbody* body)</pre>
+
+<p>Make sure the type of the collider matches with the constructor you give it.</p>
