@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="../doc_style.css">
+
+<h1>Editor</h1>
+
+<p>
+Salmon Engine comes with an optional editor that you can use.<br>
+Here's how you can use it.<br>
+Instead of calling StartStartSystems on the end of the first frame, you should call StartEditorStartSystems.<br>
+And instead of calling StartSystems on every frame, you should call StartEditorSystems, and only call StartSystems if `playing` is true.<br>
+Also call DrawHierarchy, DrawInspector and DrawTray every frame. In code, it will look like this:
+</p>
+
+<pre class="code">
+//...
+
+StartEditorStartSystems();
+
+ImGuiLayer::Init();
+
+// Main loop
+// -----------
+while (!window.ShouldClose())
+{
+    ImGuiLayer::NewFrame();
+
+    UpdateEditorSystems();
+    if (playing)
+    {
+        UpdateSystems();
+    }
+
+    DrawHierarchy();
+    DrawInspector();
+    DrawTray();
+    //...
+    ImGuiLayer::EndFrame();
+    window.Update();
+}
+
+ImGuiLayer::Terminate();
+//...
+</pre>

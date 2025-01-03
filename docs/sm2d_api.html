@@ -48,3 +48,16 @@ Collider(ColliderType type, const ColCircle& circle, Rigidbody* body)
 Collider(ColliderType type, const ColPolygon& poly, Rigidbody* body)</pre>
 
 <p>Make sure the type of the collider matches with the constructor you give it.</p>
+<p>Also you have to make an std::vector of Manifolds in your main function</p>
+<p>Clear them every frame, get collisions from the BVH tree, and resolve them.<br>
+It will look a bit like this:</p>
+
+<pre class="code">
+std::vector&lt;Manifold&gt; manifolds;
+
+while (!window.ShouldClose())
+{
+    manifolds.clear();
+    GetCollisionsInTree(bvh, manifolds);
+    ResolveCollisions(bvh, manifolds);
+}</pre>
