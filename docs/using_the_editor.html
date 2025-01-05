@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="../doc_style.css">
+
+<h1>Using the editor</h1>
+
+<p>
+The editor uses ImGui for GUI. There will be three main panels you'll see: The hierarchy panel, which is a list of all the entities in a scene, the inspector panel, which is the list of all components on an entity, it will only display the components on the selected entity, and you can change the selected entity by clicking on any entity in the hierarchy panel<br>
+You can also add components by right clicking in the inspector panel, and it will show you the list of registered components to add.
+<br><br>
+There is a big change in making components in the editor, you'll have to make the component (struct) regularly but you'll also need to make three functions, a rendering function which takes in a pointer to the component, this function renders the component's variables in the inspector using ImGui, A serialization function whose return type is a json object and the argument is a pointer to the component, you have to serialize the component in the json object, and finally a deserialization function which takes a pointer to the component AND a json object, you have to set the component's variables to the serialized key-value pairs in the json object.
+<br>
+You also have to register the component with a macro.
+<br><br>
+Here's an example of how to register a component:
+</p>
+
+<pre class="code">
+void TransformDraw(Transform* trans)
+{
+    if (ImGui::CollapsingHeader("Transform"))
+    {
+        ImGui::DragFloat3("Position", glm::value_ptr(trans->position));
+        ImGui::DragFloat3("Rotation", glm::value_ptr(trans->rotation));
+        ImGui::DragFloat3("Scale", glm::value_ptr(trans->scale));
+    }
+}
+
+nlohmann::json TransformSave(Transform* trans)
+{
+    return {{"Position", {trans->position.x, trans->position.y, trans->position.z}},
+            {"Rotation", {trans->rotation.x, trans->rotation.y, trans->rotation.z}},
+            {"Scale", {trans->scale.x, trans->scale.y, trans->scale.z}}};
+}
+
+void TransformLoad(Transform* trans, const nlohmann::json& j)
+{
+    trans->position = {j["Position"][0], j["Position"][1], j["Position"][2]};
+    trans->rotation = {j["Rotation"][0], j["Rotation"][1], j["Rotation"][2]};
+    trans->scale = {j["Scale"][0], j["Scale"][1], j["Scale"][2]};
+}
+
+REGISTER_COMPONENT(Transform, TransformDraw, TransformSave, TransformLoad);</pre>
